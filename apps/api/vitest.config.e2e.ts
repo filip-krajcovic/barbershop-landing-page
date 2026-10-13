@@ -7,5 +7,7 @@ export default defineConfig({
     root: './',
     include: ['test/**/*.e2e-spec.ts'],
     env: testEnv,
+    // e2e testy zdieľajú jednu databázu – súbory bežia postupne
+    fileParallelism: false,
   },
 });
