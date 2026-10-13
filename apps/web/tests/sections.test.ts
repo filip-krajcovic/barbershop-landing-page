@@ -52,7 +52,14 @@ describe('ServicesSection', () => {
     expect(items[0]!.text()).toContain('22 €');
     expect(items[1]!.text()).toContain('25,50 €');
     expect(items[1]!.text()).toContain('50 min');
-    expect(items[0]!.find('a').attributes('aria-label')).toBe('Rezervovať: Pánsky strih');
+    const button = items[1]!.get('button');
+    expect(button.attributes('aria-label')).toBe('Rezervovať: Skin fade');
+    await button.trigger('click');
+    expect(useBooking().state.value).toMatchObject({
+      isOpen: true,
+      step: 2,
+      serviceId: services[1]!.id,
+    });
   });
 
   it('pri chybe API ukáže telefón namiesto cenníka', async () => {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const booking = useBooking();
 const links = [
   { label: 'Služby', to: '/#sluzby' },
   { label: 'Recenzie', to: '/#recenzie' },
@@ -31,7 +32,7 @@ const links = [
         >
           {{ link.label }}
         </NuxtLink>
-        <BaseButton to="/#rezervacia">Rezervovať</BaseButton>
+        <BaseButton @click="booking.open()">Rezervovať</BaseButton>
       </nav>
     </div>
   </header>

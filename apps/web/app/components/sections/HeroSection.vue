@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { site } from '~/data/site';
 
+const booking = useBooking();
+
 const stats = [
   {
     value: site.rating.value.toLocaleString('sk-SK'),
@@ -26,7 +28,7 @@ const stats = [
         barber, jeden klient, žiadne čakanie v rade.
       </p>
       <div class="flex flex-wrap gap-3">
-        <BaseButton size="lg" to="/#rezervacia">Rezervovať termín</BaseButton>
+        <BaseButton size="lg" @click="booking.open()">Rezervovať termín</BaseButton>
         <BaseButton size="lg" variant="ghost" to="/#sluzby">Cenník služieb</BaseButton>
       </div>
       <dl class="mt-2.5 grid max-w-[560px] grid-cols-3 gap-4 border-t border-line pt-6.5">
