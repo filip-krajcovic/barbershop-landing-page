@@ -1,0 +1,79 @@
+@import 'tailwindcss';
+/* Fonty z npm (@fontsource) – servírujú sa z vlastnej domény, build nepotrebuje externé služby. */
+@import '@fontsource-variable/manrope';
+@import '@fontsource-variable/big-shoulders-display';
+
+/*
+  Design tokeny podľa dizajnu „Britva Barber – landing page“.
+  Tailwind z nich generuje utility, napr. bg-canvas, text-ink-muted, border-line, font-display.
+*/
+@theme {
+  /* plochy */
+  --color-canvas: #121110;
+  --color-surface: #1c1a17;
+  --color-surface-2: #1f1d1a;
+  --color-raised: #1a1815;
+  --color-overlay: #171513;
+
+  /* línie */
+  --color-line: #2a2724;
+  --color-line-soft: #34302b;
+  --color-line-strong: #4a453e;
+
+  /* text na tmavom pozadí */
+  --color-ink: #ede7dd;
+  --color-ink-soft: #cfc7bb;
+  --color-ink-muted: #bdb4a7;
+  --color-ink-dim: #a39a8c;
+  --color-ink-faint: #8f877b;
+
+  /* akcent */
+  --color-accent: #d9a54c;
+  --color-accent-hover: #f3d39a;
+  --color-on-accent: #15130f;
+
+  /* svetlá sekcia (cenník) */
+  --color-paper: #ede7dd;
+  --color-paper-ink: #191714;
+  --color-paper-muted: #4d4740;
+  --color-paper-line: #cbc2b5;
+  --color-paper-accent: #7a5418;
+
+  --font-display: 'Big Shoulders Display Variable', 'Arial Narrow', sans-serif;
+  --font-sans: 'Manrope Variable', system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
+  --radius-panel: 1.75rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-base leading-relaxed text-ink antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-3 outline-accent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* Šírka obsahu – max 1200 px, bočné okraje 16 px (mobil) / 24 px. */
+  .container-page {
+    @apply mx-auto w-full max-w-[1200px] px-4 sm:px-6;
+  }
+
+  .display {
+    @apply font-display font-black uppercase leading-[0.95];
+  }
+}
