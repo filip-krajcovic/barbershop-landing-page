@@ -6,4 +6,6 @@ export const testEnv: Record<string, string> = {
   DATABASE_URL: process.env.DATABASE_URL ?? 'postgres://britva:britva@localhost:5432/britva_test',
   BETTER_AUTH_SECRET: 'test-secret-test-secret-test-secret-123',
   BETTER_AUTH_URL: 'http://localhost:3001',
+  // e2e testy vytvárajú veľa rezervácií z jednej IP
+  BOOKING_RATE_LIMIT: '1000',
 };

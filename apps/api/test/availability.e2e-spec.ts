@@ -5,14 +5,7 @@ import type { Pool } from 'pg';
 import request from 'supertest';
 import { addDays, todayIn, weekdayOf, zonedTime } from '../src/availability/local-date.js';
 import { createTestApp } from './create-app.js';
-import { cleanupTestData, getPool, uniqueSlug } from './helpers.js';
-
-/** Najbližší pracovný deň (po–pi) aspoň 2 dni od dnes – sloty nie sú ovplyvnené aktuálnym časom. */
-function nextWorkday(): string {
-  let date = addDays(todayIn(new Date()), 2);
-  while ([0, 6].includes(weekdayOf(date))) date = addDays(date, 1);
-  return date;
-}
+import { cleanupTestData, getPool, nextWorkday, uniqueSlug } from './helpers.js';
 
 describe('dostupnosť termínov (e2e)', () => {
   let app: NestExpressApplication;

@@ -3,6 +3,7 @@ import type { UserRole } from '@britva/shared';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import type { Pool } from 'pg';
 import request from 'supertest';
+import { addDays, todayIn, weekdayOf } from '../src/availability/local-date.js';
 import { PG_POOL } from '../src/database/database.constants.js';
 
 export const ORIGIN = 'http://localhost:3000';
@@ -55,4 +56,11 @@ export async function cleanupTestData(app: NestExpressApplication): Promise<void
   );
   await pool.query(`DELETE FROM barbers WHERE slug LIKE $1`, [`${TEST_PREFIX}%`]);
   await pool.query(`DELETE FROM services WHERE slug LIKE $1`, [`${TEST_PREFIX}%`]);
+}
+
+/** Najbližší pracovný deň (po–pi) aspoň 2 dni od dnes – sloty nie sú ovplyvnené aktuálnym časom. */
+export function nextWorkday(): string {
+  let date = addDays(todayIn(new Date()), 2);
+  while ([0, 6].includes(weekdayOf(date))) date = addDays(date, 1);
+  return date;
 }
