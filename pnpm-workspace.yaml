@@ -5,3 +5,7 @@ packages:
 # Závislosti, ktorým pnpm povolí spustiť install skripty.
 onlyBuiltDependencies:
   - esbuild
+
+# Závislosti, ktorých install skripty netreba (iba fallback pri chýbajúcej binárke).
+ignoredBuiltDependencies:
+  - unrs-resolver

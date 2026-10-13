@@ -20,7 +20,7 @@ Dizajn: artefakt _Britva Barber – landing page_.
 
 ```
 apps/
-  web/                 Nuxt aplikácia (stránky, komponenty, composables)
+  web/                 Nuxt aplikácia (app/: stránky, komponenty, composables)
   api/                 NestJS API
     src/auth/          better-auth + guardy
     src/database/      Drizzle schéma, klient, seed
@@ -43,9 +43,10 @@ Požiadavky: Node.js 22+, pnpm 10, Docker.
 pnpm install
 cp .env.example .env            # premenné pre docker compose
 cp apps/api/.env.example apps/api/.env  # premenné API (DATABASE_URL, better-auth)
+cp apps/web/.env.example apps/web/.env  # URL API pre web
 pnpm db:up                      # PostgreSQL 16 na localhost:5432
 pnpm db:migrate && pnpm db:seed # schéma a ukážkové dáta
-pnpm dev                        # web (Nuxt) aj API (NestJS)
+pnpm dev                        # web http://localhost:3000, API http://localhost:3001
 ```
 
 ## Skripty
