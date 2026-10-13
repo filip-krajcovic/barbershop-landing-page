@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { IconName } from '~/components/ui/AppIcon.vue';
 
+const booking = useBooking();
+
 const perks: { icon: IconName; title: string; subtitle: string }[] = [
   { icon: 'clock', title: 'Za menej ako minútu', subtitle: '4 krátke kroky, bez registrácie' },
   { icon: 'phone', title: 'SMS potvrdenie', subtitle: 'aj pripomienka deň vopred' },
@@ -20,7 +22,7 @@ const perks: { icon: IconName; title: string; subtitle: string }[] = [
           Vyber si službu, barbera a čas. Celé to zaberie menej ako minútu a potvrdenie ti príde
           SMS.
         </p>
-        <BaseButton size="lg" to="/#rezervacia">Otvoriť rezerváciu</BaseButton>
+        <BaseButton size="lg" @click="booking.open()">Otvoriť rezerváciu</BaseButton>
       </div>
       <ul
         class="flex min-w-0 flex-[1_1_320px] flex-col justify-center gap-5.5 border-t border-line p-8 sm:p-12 lg:border-t-0 lg:border-l"

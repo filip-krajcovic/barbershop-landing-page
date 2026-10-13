@@ -2,6 +2,7 @@
 import { site } from '~/data/site';
 
 const { data: services, error } = useServices();
+const booking = useBooking();
 </script>
 
 <template>
@@ -46,9 +47,9 @@ const { data: services, error } = useServices();
             </p>
             <BaseButton
               variant="link"
-              to="/#rezervacia"
               class="text-sm whitespace-nowrap text-paper-accent! hover:text-paper-ink!"
               :aria-label="`Rezervovať: ${service.name}`"
+              @click="booking.open({ serviceId: service.id })"
             >
               Rezervovať →
             </BaseButton>

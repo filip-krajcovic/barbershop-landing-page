@@ -6,6 +6,16 @@ const { data: services } = useServices();
 const service = computed(() => services.value[0]);
 const { data: slot, status } = useNextFreeSlot(() => service.value?.id);
 
+const booking = useBooking();
+
+function pick() {
+  if (!service.value) return booking.open();
+  booking.open({
+    serviceId: service.value.id,
+    slot: slot.value ? { startsAt: slot.value.startsAt, endsAt: slot.value.endsAt } : undefined,
+  });
+}
+
 const label = computed(() => {
   if (status.value === 'pending' || status.value === 'idle') return null;
   return slot.value ? formatSlotLabel(slot.value.startsAt) : 'Rezervuj online';
@@ -44,7 +54,7 @@ const label = computed(() => {
           <span v-else class="inline-block h-10 w-48 animate-pulse rounded-lg bg-surface-2" />
           <span v-if="!label" class="sr-only">Načítavam najbližší voľný termín…</span>
         </p>
-        <BaseButton variant="link" to="/#rezervacia" class="mt-2 text-[15px]">
+        <BaseButton variant="link" class="mt-2 text-[15px]" @click="pick">
           {{ slot ? 'Vybrať tento termín →' : 'Vybrať termín →' }}
         </BaseButton>
       </div>

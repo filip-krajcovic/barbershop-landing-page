@@ -11,5 +11,8 @@
       <slot />
     </main>
     <AppFooter />
+    <ClientOnly>
+      <BookingDialog />
+    </ClientOnly>
   </div>
 </template>
