@@ -1,3 +1,28 @@
 {
-  "//": "Koreň pnpm monorepa: spoločné skripty (dev, build, lint, db:*), engines (Node 22+), packageManager."
+  "name": "britva-barber",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Britva Barber – landing page a online rezervácie (monorepo)",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter \"./apps/*\" dev",
+    "build": "pnpm -r --if-present build",
+    "lint": "pnpm -r --if-present lint",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "pnpm -r --if-present test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
+    "db:generate": "pnpm --filter @britva/api db:generate",
+    "db:migrate": "pnpm --filter @britva/api db:migrate",
+    "db:seed": "pnpm --filter @britva/api db:seed"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3"
+  }
 }

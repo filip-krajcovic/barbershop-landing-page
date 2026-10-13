@@ -1,3 +1,6 @@
 {
-  "//": "Balík @britva/shared: typy a zod schémy zdieľané medzi webom a API."
+  "name": "@britva/shared",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Zdieľané typy a zod schémy pre web a API"
 }

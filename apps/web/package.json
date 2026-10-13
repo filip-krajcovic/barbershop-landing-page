@@ -1,3 +1,6 @@
 {
-  "//": "Nuxt 3 aplikácia (@britva/web): nuxt, vue, tailwindcss, better-auth (vue klient), @britva/shared."
+  "name": "@britva/web",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Nuxt aplikácia – landing page a rezervácie"
 }

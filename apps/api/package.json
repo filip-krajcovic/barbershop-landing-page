@@ -1,3 +1,6 @@
 {
-  "//": "NestJS aplikácia (@britva/api): @nestjs/*, better-auth, drizzle-orm, pg, drizzle-kit, zod, @britva/shared. Skripty: start:dev, build, db:generate, db:migrate, db:seed, test."
+  "name": "@britva/api",
+  "version": "0.0.0",
+  "private": true,
+  "description": "NestJS API – rezervácie, autentifikácia (better-auth), PostgreSQL + Drizzle"
 }
