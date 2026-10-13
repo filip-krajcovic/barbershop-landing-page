@@ -1,5 +1,9 @@
 <script setup lang="ts">
 const { public: config } = useRuntimeConfig();
+const auth = useAuth();
+
+// Session raz pri štarte (na serveri s cookie z prehliadača), aby hlavička vedela, kto je prihlásený.
+await callOnce('auth-session', () => auth.refresh().catch(() => undefined));
 
 useSeoMeta({
   title: 'Pánske strihy, brada a holenie britvou',

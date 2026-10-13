@@ -47,7 +47,7 @@ describe('AppHeader a AppFooter', () => {
     const wrapper = await mountSuspended(AppHeader);
     const nav = wrapper.get('nav[aria-label="Hlavná navigácia"]');
     const hrefs = nav.findAll('a').map((a) => a.attributes('href'));
-    expect(hrefs).toEqual(['/#sluzby', '/#recenzie', '/#lokalita']);
+    expect(hrefs).toEqual(['/#sluzby', '/#recenzie', '/#lokalita', '/prihlasenie']);
 
     await nav.get('button').trigger('click');
     expect(useBooking().state.value).toMatchObject({ isOpen: true, step: 1 });

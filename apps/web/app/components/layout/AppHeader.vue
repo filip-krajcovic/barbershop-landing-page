@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const booking = useBooking();
+const { loggedIn } = useAuth();
 const links = [
   { label: 'Služby', to: '/#sluzby' },
   { label: 'Recenzie', to: '/#recenzie' },
@@ -31,6 +32,12 @@ const links = [
           class="py-2.5 text-ink-soft transition-colors hover:text-accent-hover"
         >
           {{ link.label }}
+        </NuxtLink>
+        <NuxtLink
+          :to="loggedIn ? '/moje-rezervacie' : '/prihlasenie'"
+          class="py-2.5 text-ink-soft transition-colors hover:text-accent-hover"
+        >
+          {{ loggedIn ? 'Môj účet' : 'Prihlásiť sa' }}
         </NuxtLink>
         <BaseButton @click="booking.open()">Rezervovať</BaseButton>
       </nav>
