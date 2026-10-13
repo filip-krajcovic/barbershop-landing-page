@@ -1,32 +1,40 @@
 # Britva Barber – landing page
 
-Landing page pre barbershop **Britva Barber** (Trnava). Dizajn vychádza z artefaktu *Britva Barber – landing page*.
+Landing page + online rezervácie pre barbershop **Britva Barber** (Trnava).
+Dizajn: artefakt *Britva Barber – landing page*.
 
-Statická stránka bez build nástrojov – stačí otvoriť `index.html` alebo spustiť lokálny server:
+> Stav: **iba prázdna súborová štruktúra**. Každý súbor obsahuje komentár s popisom, čo v ňom bude.
 
-```bash
-python3 -m http.server 8000
-# http://localhost:8000
-```
+## Stack
+
+| Vrstva        | Technológia                                  |
+| ------------- | -------------------------------------------- |
+| Frontend      | Nuxt 3 (Vue 3) + Tailwind CSS                |
+| Backend       | NestJS (REST API pre rezervácie)             |
+| Autentifikácia| better-auth                                  |
+| Databáza      | PostgreSQL + Drizzle ORM                     |
+| Migrácie      | drizzle-kit, SQL súbory verzované v gite     |
+| Monorepo      | pnpm workspaces                              |
 
 ## Štruktúra
 
 ```
-index.html        # obsah stránky (hero, služby, rezervácia, recenzie, lokalita, pätička, dialóg)
-css/styles.css    # design tokeny (:root) + štýly sekcií, responzívne
-js/main.js        # otváranie/zatváranie rezervačného dialógu
-assets/img/       # obrázky
+apps/
+  web/                 Nuxt aplikácia (stránky, komponenty, composables)
+  api/                 NestJS API
+    src/auth/          better-auth + guardy
+    src/database/      Drizzle schéma, klient, seed
+    src/bookings/      rezervácie
+    src/availability/  výpočet voľných termínov
+    src/services/      cenník
+    src/barbers/       barberi
+    src/notifications/ SMS potvrdenia a pripomienky
+    drizzle/           SQL migrácie (commitujú sa)
+packages/
+  shared/              zdieľané typy a zod schémy
+docs/                  architektúra, dizajn, databáza
 ```
 
-## Dizajn
+## Migrácie
 
-- Tmavá téma, akcent `#d9a54c`, svetlá sekcia Služby
-- Fonty: **Big Shoulders Display** (nadpisy), **Manrope** (text) cez Google Fonts
-- Responzívne od 390 px do desktopu
-
-## TODO
-
-- Rezervačný dialóg: kroky služba → barber → termín → údaje, potvrdenie
-- „Najbližší voľný termín“ z reálnej dostupnosti
-- Skutočná mapa namiesto zástupného bloku
-- Reálne kontakty, odkazy na sociálne siete a stránka Ochrana súkromia
+Zmena schémy v `apps/api/src/database/schema/` → `pnpm db:generate` → skontrolovať SQL v `apps/api/drizzle/` → commit → `pnpm db:migrate`.

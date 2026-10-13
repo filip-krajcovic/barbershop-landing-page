@@ -1,0 +1,3 @@
+<!--
+  Zásady ochrany osobných údajov.
+-->

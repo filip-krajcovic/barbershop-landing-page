@@ -1,0 +1,3 @@
+/**
+ * Plánovač (@nestjs/schedule) pripomienok.
+ */

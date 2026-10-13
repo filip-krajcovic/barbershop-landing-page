@@ -1,0 +1,3 @@
+/**
+ * Guard vyžadujúci platnú session.
+ */

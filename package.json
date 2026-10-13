@@ -1,0 +1,3 @@
+{
+  "//": "Koreň pnpm monorepa: spoločné skripty (dev, build, lint, db:*), engines (Node 22+), packageManager."
+}

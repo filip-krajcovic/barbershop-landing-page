@@ -1,0 +1,3 @@
+/**
+ * Dekorátor @Roles(...).
+ */

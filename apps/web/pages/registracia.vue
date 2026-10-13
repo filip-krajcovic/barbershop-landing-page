@@ -1,0 +1,3 @@
+<!--
+  Registrácia zákazníka (better-auth).
+-->
