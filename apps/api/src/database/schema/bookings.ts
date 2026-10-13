@@ -1,5 +1,6 @@
 import { sql } from 'drizzle-orm';
 import { check, index, pgEnum, pgTable, text, uuid, varchar } from 'drizzle-orm/pg-core';
+import { user } from './auth.js';
 import { barbers } from './barbers.js';
 import { timestamptz, id, timestamps } from './columns.js';
 import { services } from './services.js';
@@ -20,8 +21,8 @@ export const bookings = pgTable(
   {
     id: id(),
     code: varchar({ length: 16 }).notNull().unique(),
-    /** ID používateľa z better-auth; null pre rezerváciu bez účtu. FK pribudne s tabuľkou user. */
-    userId: text(),
+    /** Používateľ (better-auth); null pre rezerváciu bez účtu. Pri zmazaní účtu rezervácia ostane. */
+    userId: text().references(() => user.id, { onDelete: 'set null' }),
     serviceId: uuid()
       .notNull()
       .references(() => services.id, { onDelete: 'restrict' }),

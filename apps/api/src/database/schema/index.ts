@@ -1,3 +1,4 @@
+export * from './auth.js';
 export * from './barbers.js';
 export * from './bookings.js';
 export * from './services.js';
