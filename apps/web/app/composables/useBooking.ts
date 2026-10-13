@@ -41,7 +41,8 @@ export interface BookingPreset {
 
 export const BOOKING_STEPS = ['Služba', 'Barber', 'Termín', 'Údaje'] as const;
 
-const initialState = (): BookingState => ({
+/** Počiatočný (prázdny) stav rezervácie. */
+export const initialBookingState = (): BookingState => ({
   isOpen: false,
   step: 1,
   serviceId: null,
@@ -63,7 +64,7 @@ const initialState = (): BookingState => ({
  * môže otvoriť ktorékoľvek tlačidlo na stránke s predvolenou službou alebo termínom.
  */
 export function useBooking() {
-  const state = useState<BookingState>('booking', initialState);
+  const state = useState<BookingState>('booking', initialBookingState);
   const api = useApi();
 
   const contactErrors = computed(() => {
@@ -115,7 +116,7 @@ export function useBooking() {
 
   function open(preset: BookingPreset = {}) {
     const { name, phone, note } = state.value;
-    state.value = { ...initialState(), name, phone, note, isOpen: true };
+    state.value = { ...initialBookingState(), name, phone, note, isOpen: true };
     if (preset.serviceId) {
       state.value.serviceId = preset.serviceId;
       state.value.step = 2;
@@ -134,7 +135,7 @@ export function useBooking() {
     // po úspešnej rezervácii začne ďalšia odznova (kontakt ostane)
     if (done) {
       const { name, phone } = state.value;
-      state.value = { ...initialState(), name, phone };
+      state.value = { ...initialBookingState(), name, phone };
     }
   }
 
