@@ -33,8 +33,15 @@ export const nextFreeSlotSchema = z
   })
   .nullable();
 
+/**
+ * Odpoveď `GET /api/availability/next-free`. Obalené v objekte, pretože NestJS
+ * pri návratovej hodnote `null` posiela prázdne telo namiesto JSON `null`.
+ */
+export const nextFreeSlotResponseSchema = z.object({ slot: nextFreeSlotSchema });
+
 export type AvailabilityQuery = z.infer<typeof availabilityQuerySchema>;
 export type Slot = z.infer<typeof slotSchema>;
 export type AvailabilityResponse = z.infer<typeof availabilityResponseSchema>;
 export type NextFreeSlotQuery = z.infer<typeof nextFreeSlotQuerySchema>;
 export type NextFreeSlot = z.infer<typeof nextFreeSlotSchema>;
+export type NextFreeSlotResponse = z.infer<typeof nextFreeSlotResponseSchema>;

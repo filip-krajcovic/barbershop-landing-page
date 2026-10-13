@@ -45,9 +45,14 @@ export async function signInAs(app: NestExpressApplication, role: UserRole): Pro
   return cookieFrom(res);
 }
 
-/** Zmaže služby a barberov vytvorených testami (väzby sa zmažú kaskádou). */
+/** Zmaže rezervácie, služby a barberov vytvorených testami (väzby sa zmažú kaskádou). */
 export async function cleanupTestData(app: NestExpressApplication): Promise<void> {
   const pool = getPool(app);
+  await pool.query(
+    `DELETE FROM bookings WHERE service_id IN (SELECT id FROM services WHERE slug LIKE $1)
+       OR barber_id IN (SELECT id FROM barbers WHERE slug LIKE $1)`,
+    [`${TEST_PREFIX}%`],
+  );
   await pool.query(`DELETE FROM barbers WHERE slug LIKE $1`, [`${TEST_PREFIX}%`]);
   await pool.query(`DELETE FROM services WHERE slug LIKE $1`, [`${TEST_PREFIX}%`]);
 }
