@@ -20,7 +20,10 @@ describe('API (e2e)', () => {
   });
 
   it('GET /api/health', () => {
-    return request(app.getHttpServer()).get('/api/health').expect(200).expect({ status: 'ok' });
+    return request(app.getHttpServer())
+      .get('/api/health')
+      .expect(200)
+      .expect({ status: 'ok', database: 'ok' });
   });
 
   it('neznáma cesta vráti 404 v jednotnom formáte', async () => {
