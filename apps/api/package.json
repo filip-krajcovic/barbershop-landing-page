@@ -12,7 +12,12 @@
     "lint": "eslint .",
     "test": "vitest run && vitest run --config vitest.config.e2e.ts",
     "test:unit": "vitest run",
-    "test:e2e": "vitest run --config vitest.config.e2e.ts"
+    "test:e2e": "vitest run --config vitest.config.e2e.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:check": "drizzle-kit check",
+    "db:seed": "tsx src/database/seed.ts",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@britva/shared": "workspace:*",
@@ -20,6 +25,8 @@
     "@nestjs/config": "^12.0.1",
     "@nestjs/core": "^12.1.3",
     "@nestjs/platform-express": "^12.1.3",
+    "drizzle-orm": "^0.45.4",
+    "pg": "^8.23.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
     "zod": "^4.6.7"
@@ -31,10 +38,13 @@
     "@nestjs/testing": "^12.1.3",
     "@types/express": "^5.0.6",
     "@types/node": "^22.20.5",
+    "@types/pg": "^8.23.1",
     "@types/supertest": "^7.2.1",
+    "drizzle-kit": "^0.31.11",
     "eslint": "^10.12.0",
     "globals": "^17.13.0",
     "supertest": "^7.3.1",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.2",
     "vite": "^8.3.4",

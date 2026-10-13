@@ -1,3 +1,5 @@
-# README
+# Migrácie
 
-Adresár s SQL migráciami generovanými drizzle-kit (db:generate). Súbory sa COMMITUJÚ do gitu; nikdy ich needitovať ručne po zlúčení do main.
+SQL migrácie generované `drizzle-kit` (`pnpm db:generate`) + vlastné migrácie (`--custom`). Súbory sa **commitujú do gitu** a po merge sa nikdy needitujú.
+
+Postup a pravidlá: [docs/DATABASE.md](../../../docs/DATABASE.md).

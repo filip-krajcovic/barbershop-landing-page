@@ -42,6 +42,7 @@ Požiadavky: Node.js 22+, pnpm 10, Docker.
 ```bash
 pnpm install
 cp .env.example .env            # premenné pre docker compose
+cp apps/api/.env.example apps/api/.env  # premenné API (DATABASE_URL, better-auth)
 pnpm db:up                      # PostgreSQL 16 na localhost:5432
 pnpm db:migrate && pnpm db:seed # schéma a ukážkové dáta
 pnpm dev                        # web (Nuxt) aj API (NestJS)
