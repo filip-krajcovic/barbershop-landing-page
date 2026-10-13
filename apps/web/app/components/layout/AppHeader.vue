@@ -9,7 +9,11 @@ const links = [
 <template>
   <header class="sticky top-0 z-10 border-b border-line bg-canvas/92 backdrop-blur-md">
     <div class="container-page flex flex-wrap items-center justify-between gap-x-6 gap-y-3 py-3.5">
-      <NuxtLink to="/" class="flex items-center gap-2.5 text-ink" aria-label="Britva Barber – úvod">
+      <NuxtLink
+        to="/"
+        class="flex min-h-11 items-center gap-2.5 text-ink"
+        aria-label="Britva Barber – úvod"
+      >
         <AppLogo class="text-accent" />
         <span class="font-display text-[26px] font-extrabold tracking-[0.04em] uppercase"
           >Britva</span

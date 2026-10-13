@@ -16,6 +16,7 @@ export const site = {
     { days: 'Sobota', hours: '8:00 – 13:00' },
     { days: 'Nedeľa', hours: 'zatvorené' },
   ],
+  /** UKÁŽKOVÉ hodnotenie z dizajnu – pred spustením nahraď skutočným z Google. */
   rating: { value: 4.9, count: 312 },
   social: [
     { label: 'Instagram', href: 'https://instagram.com' },

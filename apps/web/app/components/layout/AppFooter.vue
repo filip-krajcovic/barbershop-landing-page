@@ -20,11 +20,14 @@ const year = new Date().getFullYear();
           :href="item.href"
           target="_blank"
           rel="noopener"
-          class="py-2.5 text-ink-soft hover:text-accent-hover"
+          class="inline-flex min-h-11 items-center text-ink-soft hover:text-accent-hover"
         >
           {{ item.label }}
         </a>
-        <NuxtLink to="/ochrana-sukromia" class="py-2.5 text-ink-soft hover:text-accent-hover">
+        <NuxtLink
+          to="/ochrana-sukromia"
+          class="inline-flex min-h-11 items-center text-ink-soft hover:text-accent-hover"
+        >
           Ochrana súkromia
         </NuxtLink>
       </nav>
