@@ -76,6 +76,23 @@ describe('autentifikácia (e2e)', () => {
     await http().get('/api/me').set('Cookie', cookie).expect(401);
   });
 
+  it('prihlásený používateľ si nemôže nastaviť rolu admin cez update-user', async () => {
+    const res = await http()
+      .post('/api/auth/sign-up/email')
+      .set('Origin', ORIGIN)
+      .send({ name: 'Útočník', email: `test-${randomUUID()}@britva.test`, password })
+      .expect(200);
+    const cookie = cookieFrom(res);
+    await http()
+      .post('/api/auth/update-user')
+      .set('Origin', ORIGIN)
+      .set('Cookie', cookie)
+      .send({ role: 'admin' })
+      .expect(400);
+    const me = await http().get('/api/me').set('Cookie', cookie).expect(200);
+    expect(me.body.role).toBe('customer');
+  });
+
   it('odmietne krátke heslo', async () => {
     await http()
       .post('/api/auth/sign-up/email')

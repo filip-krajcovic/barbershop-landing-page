@@ -5,10 +5,14 @@ import {
   availabilityQuerySchema,
   bookingCodeSchema,
   canCancelBooking,
+  createBarberSchema,
   createBookingSchema,
+  createServiceSchema,
   nextFreeSlotSchema,
   phoneSchema,
   serviceSchema,
+  updateBarberSchema,
+  updateServiceSchema,
 } from '../src';
 
 const validBooking = {
@@ -127,5 +131,38 @@ describe('canCancelBooking', () => {
   it('zakáže zrušenie menej ako 12 h vopred', () => {
     expect(canCancelBooking(new Date('2026-10-14T19:59:59Z'), now)).toBe(false);
     expect(canCancelBooking(new Date('2026-10-14T07:00:00Z'), now)).toBe(false);
+  });
+});
+
+describe('admin schémy služieb a barberov', () => {
+  it('createServiceSchema doplní predvolené hodnoty', () => {
+    expect(
+      createServiceSchema.parse({ slug: 'novy', name: 'Nový', durationMin: 30, priceCents: 1000 }),
+    ).toMatchObject({ description: '', sortOrder: 0, active: true });
+  });
+
+  it('updateServiceSchema nedoplní predvolené hodnoty (PATCH nič neprepíše)', () => {
+    expect(updateServiceSchema.parse({ priceCents: 1500 })).toEqual({ priceCents: 1500 });
+    expect(updateBarberSchema.parse({ name: 'Ján' })).toEqual({ name: 'Ján' });
+  });
+
+  it('prázdny PATCH je neplatný', () => {
+    expect(updateServiceSchema.safeParse({}).success).toBe(false);
+    expect(updateBarberSchema.safeParse({}).success).toBe(false);
+  });
+
+  it('slug musí byť URL-friendly', () => {
+    const base = { name: 'X', durationMin: 30, priceCents: 0 };
+    expect(createServiceSchema.safeParse({ ...base, slug: 'Skin Fade' }).success).toBe(false);
+    expect(createServiceSchema.safeParse({ ...base, slug: '-fade' }).success).toBe(false);
+    expect(createServiceSchema.safeParse({ ...base, slug: 'skin-fade-2' }).success).toBe(true);
+  });
+
+  it('createBarberSchema má prázdny zoznam služieb a avatar null', () => {
+    expect(createBarberSchema.parse({ slug: 'jan', name: 'Ján' })).toMatchObject({
+      serviceIds: [],
+      avatarUrl: null,
+      active: true,
+    });
   });
 });
