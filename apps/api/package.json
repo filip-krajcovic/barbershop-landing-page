@@ -17,7 +17,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:check": "drizzle-kit check",
     "db:seed": "tsx src/database/seed.ts",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "auth:make-admin": "tsx src/auth/make-admin.ts"
   },
   "dependencies": {
     "@britva/shared": "workspace:*",
@@ -25,7 +26,9 @@
     "@nestjs/config": "^12.0.1",
     "@nestjs/core": "^12.1.3",
     "@nestjs/platform-express": "^12.1.3",
+    "better-auth": "^1.7.7",
     "drizzle-orm": "^0.45.4",
+    "express": "^5.2.1",
     "pg": "^8.23.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",

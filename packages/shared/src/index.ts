@@ -4,3 +4,4 @@ export * from './booking';
 export * from './common';
 export * from './constants';
 export * from './service';
+export * from './user';
