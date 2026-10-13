@@ -1,3 +1,7 @@
 packages:
   - apps/*
   - packages/*
+
+# Závislosti, ktorým pnpm povolí spustiť install skripty.
+onlyBuiltDependencies:
+  - esbuild
