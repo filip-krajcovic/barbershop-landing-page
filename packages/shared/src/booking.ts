@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { barberIdOrAnySchema } from './barber';
-import { dateTimeSchema, idSchema } from './common';
+import { dateStringSchema, dateTimeSchema, idSchema } from './common';
 
 export const bookingStatusSchema = z.enum(['pending', 'confirmed', 'cancelled', 'completed']);
 
@@ -50,8 +50,15 @@ export const bookingDetailsSchema = bookingSchema.extend({
   barber: z.object({ name: z.string() }),
 });
 
+/** Admin zoznam rezervácií: voliteľne iba jeden deň a/alebo jeden barber. */
+export const bookingListQuerySchema = z.object({
+  date: dateStringSchema.optional(),
+  barberId: idSchema.optional(),
+});
+
 export type BookingStatus = z.infer<typeof bookingStatusSchema>;
 export type CreateBookingInput = z.input<typeof createBookingSchema>;
 export type CreateBooking = z.output<typeof createBookingSchema>;
 export type Booking = z.infer<typeof bookingSchema>;
 export type BookingDetails = z.infer<typeof bookingDetailsSchema>;
+export type BookingListQuery = z.infer<typeof bookingListQuerySchema>;

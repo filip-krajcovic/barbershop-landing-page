@@ -36,6 +36,8 @@ export const bookings = pgTable(
     note: text(),
     status: bookingStatus().notNull().default('confirmed'),
     cancelledAt: timestamptz(),
+    /** Kedy odišla SMS pripomienka deň vopred (null = ešte nie). */
+    reminderSentAt: timestamptz(),
     ...timestamps,
   },
   (t) => [
