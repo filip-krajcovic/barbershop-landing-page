@@ -2,14 +2,14 @@ import { inferAdditionalFields } from 'better-auth/client/plugins';
 import { createAuthClient } from 'better-auth/vue';
 
 /**
- * Klient better-auth pre API (`<apiUrl>/api/auth/*`). Dodatočné polia používateľa
- * zodpovedajú serveru: `role` (iba na čítanie) a voliteľný `phone`.
+ * Klient better-auth pre API (`<origin>/api/auth/*`, viď `useApiTarget`). Dodatočné polia
+ * používateľa zodpovedajú serveru: `role` (iba na čítanie) a voliteľný `phone`.
  */
-export function createBritvaAuthClient(apiUrl: string) {
+export function createBritvaAuthClient(origin: string, headers?: Record<string, string>) {
   return createAuthClient({
-    baseURL: apiUrl,
+    baseURL: origin,
     basePath: '/api/auth',
-    fetchOptions: { credentials: 'include' },
+    fetchOptions: { credentials: 'include', headers },
     plugins: [
       inferAdditionalFields({
         user: {

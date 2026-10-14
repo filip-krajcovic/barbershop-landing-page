@@ -2,6 +2,7 @@ node_modules/
 .nuxt/
 .output/
 dist/
+.wrangler/
 coverage/
 .env
 .env.*

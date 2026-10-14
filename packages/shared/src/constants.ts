@@ -17,3 +17,12 @@ export const CANCELLATION_DEADLINE_HOURS = 12;
 export function canCancelBooking(startsAt: Date, now: Date = new Date()): boolean {
   return startsAt.getTime() - now.getTime() >= CANCELLATION_DEADLINE_HOURS * 60 * 60 * 1000;
 }
+
+/**
+ * Hlavička, ktorou sa server webu preukazuje API (web `NUXT_API_PROXY_SECRET` = API `PROXY_SECRET`).
+ * Web preposiela `/api/**` na API, aby bola session cookie na doméne webu.
+ */
+export const PROXY_SECRET_HEADER = 'x-britva-proxy-secret';
+
+/** IP adresa návštevníka pre rate limit v API. API jej verí iba so správnou `PROXY_SECRET_HEADER`. */
+export const CLIENT_IP_HEADER = 'x-britva-client-ip';

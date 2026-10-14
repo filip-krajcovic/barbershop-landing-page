@@ -1,12 +1,11 @@
 /**
  * Klient pre NestJS API: `useApi()('/services')`.
- * Posiela cookies (session better-auth); pri SSR prepošle cookie z requestu prehliadača.
+ * Posiela cookies (session better-auth); kam presne volá, určuje `useApiTarget`.
  */
 export function useApi() {
-  const config = useRuntimeConfig();
-  const headers = import.meta.server ? useRequestHeaders(['cookie']) : undefined;
+  const { origin, headers } = useApiTarget();
   return $fetch.create({
-    baseURL: `${config.public.apiUrl}/api`,
+    baseURL: `${origin}/api`,
     credentials: 'include',
     headers,
   });
