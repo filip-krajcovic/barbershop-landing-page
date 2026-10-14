@@ -4,7 +4,9 @@
 Prehliadač ──/api/**──► apps/web (Nuxt, proxy) ──x-britva-proxy-secret──► apps/api (NestJS, /api/*) ──► PostgreSQL
 ```
 
-Prehliadač volá iba doménu webu. Server webu (`apps/web/server/api/[...].ts`) preposiela `/api/**` na `NUXT_API_PROXY_URL`, pri SSR volá API priamo (`useApiTarget`). Session cookie je tak vždy first-party na doméne webu, aj keď API beží inde (napr. na lokálnom PC za Cloudflare Tunnel).
+Prehliadač volá iba doménu webu. Server webu (`apps/web/server/api/[...].ts`) preposiela `/api/**` na `NUXT_API_PROXY_URL`, pri SSR volá API priamo (`useApiTarget`). Session cookie je tak vždy first-party na doméne webu, aj keď API beží inde (napr. na lokálnom PC za Cloudflare Tunnel, pozri [DEPLOY.md](./DEPLOY.md)).
+
+Ak je v API nastavený `PROXY_SECRET`, API prijme iba requesty s hlavičkou `x-britva-proxy-secret` od servera webu (okrem `/api/health`). Iba vtedy verí IP návštevníka z `x-britva-client-ip`, podľa ktorej počíta rate limit rezervácií (`ClientIpThrottlerGuard`). Bez kľúča používa IP spojenia.
 
 - **`apps/web`**: Nuxt + Tailwind, landing page a rezervačný dialóg.
 - **`apps/api`**: NestJS 12 (ESM), REST API pod prefixom `/api`.

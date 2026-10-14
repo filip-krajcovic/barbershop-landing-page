@@ -4,6 +4,7 @@ import type { NestExpressApplication } from '@nestjs/platform-express';
 import { toNodeHandler } from 'better-auth/node';
 import { AUTH, AUTH_BASE_PATH, type Auth } from './auth/auth.js';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter.js';
+import { proxySecretMiddleware } from './common/proxy-secret.middleware.js';
 import type { Env } from './config/env.validation.js';
 
 /**
@@ -15,6 +16,10 @@ export const APP_OPTIONS: NestApplicationOptions = { bodyParser: false };
 /** Spoločné nastavenie aplikácie pre main.ts aj e2e testy. Volať pred `init()`/`listen()`. */
 export function setupApp(app: NestExpressApplication): void {
   const config = app.get<ConfigService<Env, true>>(ConfigService);
+
+  // Ako prvé: bez správneho tajného kľúča request nedôjde ani k better-auth.
+  const proxySecret = config.get('PROXY_SECRET', { infer: true });
+  if (proxySecret) app.use(proxySecretMiddleware(proxySecret));
 
   app.setGlobalPrefix('api');
   app.useGlobalFilters(new HttpExceptionFilter());

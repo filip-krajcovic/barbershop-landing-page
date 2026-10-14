@@ -1,5 +1,4 @@
 import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
-import { ThrottlerGuard } from '@nestjs/throttler';
 import {
   bookingListQuerySchema,
   createBookingSchema,
@@ -11,6 +10,7 @@ import {
 import type { AuthUser } from '../auth/auth.js';
 import { Auth } from '../auth/auth.decorator.js';
 import { CurrentUser } from '../auth/current-user.decorator.js';
+import { ClientIpThrottlerGuard } from '../common/client-ip-throttler.guard.js';
 import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe.js';
 import { BookingsService } from './bookings.service.js';
 
@@ -20,7 +20,7 @@ export class BookingsController {
 
   /** Rezervácia pre hosťa aj prihláseného používateľa (vtedy sa priradí k účtu). */
   @Post()
-  @UseGuards(ThrottlerGuard)
+  @UseGuards(ClientIpThrottlerGuard)
   @Auth({ optional: true })
   create(
     @Body(new ZodValidationPipe(createBookingSchema)) body: CreateBooking,
