@@ -27,6 +27,7 @@ mockNuxtImport('useAuth', () => () => {
     signIn,
     signOut: vi.fn(),
     refresh: vi.fn(),
+    ensureLoaded: vi.fn(),
   };
 });
 mockNuxtImport('navigateTo', () => navigate);
