@@ -12,9 +12,11 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   runtimeConfig: {
+    /** URL API bez `/api`, kam server webu preposiela `/api/**` (NUXT_API_PROXY_URL). */
+    apiProxyUrl: 'http://localhost:3001',
+    /** Tajný kľúč pre API, rovnaký ako PROXY_SECRET v API (NUXT_API_PROXY_SECRET). */
+    apiProxySecret: '',
     public: {
-      /** Základná URL API bez `/api` (NUXT_PUBLIC_API_URL). */
-      apiUrl: 'http://localhost:3001',
       /** Verejná URL webu pre kanonické odkazy a Open Graph (NUXT_PUBLIC_SITE_URL). */
       siteUrl: 'http://localhost:3000',
     },

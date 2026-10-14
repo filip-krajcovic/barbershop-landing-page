@@ -20,11 +20,9 @@ export function useAuth() {
   const user = useState<AuthUser | null>('auth-user', () => null);
   const loaded = useState('auth-loaded', () => false);
   const bookingState = useState<BookingState>('booking', initialBookingState);
-  // hlavičky treba prečítať synchrónne, v kontexte komponentu/middleware
-  const headers = import.meta.server ? useRequestHeaders(['cookie']) : undefined;
 
   async function refresh() {
-    const { data } = await $authClient.getSession({ fetchOptions: { headers } });
+    const { data } = await $authClient.getSession();
     const u = data?.user;
     user.value = u
       ? { id: u.id, name: u.name, email: u.email, role: u.role as UserRole, phone: u.phone ?? null }
