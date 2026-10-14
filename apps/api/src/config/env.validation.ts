@@ -7,6 +7,11 @@ export const envSchema = z.object({
   DATABASE_URL: z.url({ protocol: /^postgres(ql)?$/ }),
   BETTER_AUTH_SECRET: z.string().min(32),
   BETTER_AUTH_URL: z.url(),
+  /**
+   * Tajný kľúč zdieľaný so serverom webu (web `NUXT_API_PROXY_SECRET`). Ak je nastavený, API
+   * prijme iba requesty z webu a pre rate limit verí IP návštevníka, ktorú web pošle.
+   */
+  PROXY_SECRET: z.preprocess((v) => (v === '' ? undefined : v), z.string().min(32).optional()),
   /** Max. počet rezervácií z jednej IP adresy za minútu. */
   BOOKING_RATE_LIMIT: z.coerce.number().int().positive().default(10),
 });

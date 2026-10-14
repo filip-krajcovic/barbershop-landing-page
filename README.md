@@ -49,6 +49,10 @@ pnpm db:migrate && pnpm db:seed # schéma a ukážkové dáta
 pnpm dev                        # web http://localhost:3000, API http://localhost:3001
 ```
 
+## Nasadenie
+
+Web na Cloudflare Pages, API a databáza na vlastnom PC cez Cloudflare Tunnel: [docs/DEPLOY.md](docs/DEPLOY.md).
+
 ## Skripty
 
 | Príkaz                                        | Popis                                |

@@ -32,4 +32,13 @@ describe('validateEnv', () => {
     const { WEB_URL: _omit, ...withoutWebUrl } = valid;
     expect(() => validateEnv(withoutWebUrl)).toThrow(/WEB_URL/);
   });
+
+  it('PROXY_SECRET je voliteľný, prázdny = vypnutý, inak aspoň 32 znakov', () => {
+    expect(validateEnv(valid).PROXY_SECRET).toBeUndefined();
+    expect(validateEnv({ ...valid, PROXY_SECRET: '' }).PROXY_SECRET).toBeUndefined();
+    expect(validateEnv({ ...valid, PROXY_SECRET: 'p'.repeat(32) }).PROXY_SECRET).toBe(
+      'p'.repeat(32),
+    );
+    expect(() => validateEnv({ ...valid, PROXY_SECRET: 'kratky' })).toThrow(/PROXY_SECRET/);
+  });
 });
