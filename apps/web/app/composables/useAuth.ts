@@ -32,6 +32,12 @@ export function useAuth() {
     loaded.value = true;
   }
 
+  /** Načíta session, ak ešte nie je načítaná. Ak API neodpovedá, používateľ ostane neprihlásený. */
+  async function ensureLoaded() {
+    if (loaded.value) return;
+    await refresh().catch(() => undefined);
+  }
+
   async function signIn(email: string, password: string) {
     const { error } = await $authClient.signIn.email({ email, password });
     if (error) throw new AuthError(authErrorMessage(error));
@@ -62,6 +68,7 @@ export function useAuth() {
     loaded,
     loggedIn: computed(() => user.value !== null),
     refresh,
+    ensureLoaded,
     signIn,
     signUp,
     signOut,
