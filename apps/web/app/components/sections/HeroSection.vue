@@ -32,7 +32,8 @@ const stats = [
         <BaseButton size="lg" variant="ghost" to="/#sluzby">Cenník služieb</BaseButton>
       </div>
       <dl class="mt-2.5 grid max-w-[560px] grid-cols-3 gap-4 border-t border-line pt-6.5">
-        <div v-for="stat in stats" :key="stat.value" class="flex flex-col-reverse">
+        <!-- flex-col-reverse: číslo nad popisom; justify-end ho drží hore aj pri zalomenom popise -->
+        <div v-for="stat in stats" :key="stat.value" class="flex flex-col-reverse justify-end">
           <dt class="text-[13px] text-ink-dim">{{ stat.label }}</dt>
           <dd class="font-display text-[40px] leading-none font-extrabold">{{ stat.value }}</dd>
         </div>
