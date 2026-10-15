@@ -5,7 +5,7 @@ const { data: services, status } = useServices();
 
 <template>
   <div class="flex flex-col gap-4">
-    <h3 class="text-[22px] font-bold" tabindex="-1" data-step-heading>Akú službu si dáš?</h3>
+    <h3 class="text-[22px] font-bold" tabindex="-1" data-step-heading>Akú službu si želáte?</h3>
     <p v-if="status === 'pending'" class="text-ink-muted">Načítavam služby…</p>
     <div class="grid grid-cols-[repeat(auto-fill,minmax(min(260px,100%),1fr))] gap-2.5">
       <OptionCard

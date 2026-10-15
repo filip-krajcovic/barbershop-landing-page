@@ -60,6 +60,11 @@
     @apply outline-2 outline-offset-3 outline-accent;
   }
 
+  /* Focus presunutý programovo (nadpisy krokov rezervácie) – nie je to ovládací prvok, bez rámika. */
+  [tabindex='-1']:focus {
+    @apply outline-none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
